@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- notfound.html -->
+<html>
+  <head>
+	  <!-- Vendor Dependencies -->
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	  <!-- User Defined CSS -->
+          <link rel="stylesheet" href="../static/css/common.css">
+         <link rel="stylesheet" href="../static/css/notfound.css">
+  </head>
+  <body>
+    <title>PageNotFound</title>
+    <!-- This is the navigation bar -->
+    <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/home#probstmnt">Project Overview</a></li>
+            <li><a href="/home#appbkgnd">Application Background</a></li>
+            <li><a href="/home#anlaprch">Model Approach</a></li>
+            <li><a href="/contacts">Team</a></li>
+            <li><a href="/generate">Generate</a></li>
+            <li><a href="/about">About</a></li>
+    </ul>
+    <!-- end of navbar -->
+    <article>
+      <p>Something went awry, please try again. If situation persists, please contact system administrator.</p>
+    </article>
+  </body>
+
+  <!-- The reason the author uses a url_for static resource instead of relative path for js as in html style not based on Flask is to ensure that the javascript is loaded after the initial window.pageload. The result is that the div's will be organized in proper order with proper parent/child scope inheritance. -->
+  <script type="text/javascript" src={{ url_for('static', filename='js/notfound.js') }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename='js/common.js') }}></script>
+
+</html>
