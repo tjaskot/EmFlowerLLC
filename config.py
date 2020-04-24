@@ -1,41 +1,20 @@
-# ### config.py ###
-# from os import environ
-#
-# class Config:
-#     """Set Flask configuration vars from .env file."""
-#
-#     # General
-#     TESTING = environ.get('TESTING')
-#     FLASK_DEBUG = environ.get('FLASK_DEBUG')
-#     SECRET_KEY = environ.get('SECRET_KEY')
-#
-#     # Database
-#     SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
-#     SQLALCHEMY_TRACK_MODIFICATIONS = environ.get('SQLALCHEMY_TRACK_MODIFICATIONS')
-#
-# ### Copied Code ###
-# #base directory for sqlalchemy database file
-# basedir = os.path.abspath(os.path.dirname(__file__))
-#
-# class Config(object):
-#     # ...
-#     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-#         'sqlite:///' + os.path.join(basedir, 'app.db')
-#     SQLALCHEMY_TRACK_MODIFICATIONS = False
-#
-# from app import routes, models
-#
-# ### app/models.py ###
-# from datetime import datetime
-# from app import db
-#
-# class Post(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     body = db.Column(db.String(140))
-#     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#
-#     def __repr__(self):
-#         return '<Post {}>'.format(self.body)
-#
-# print("REACHED CONFIG")
+import os
+from datetime import timedelta
+
+class Config:
+    # General
+    FLASK_APP = os.environ.get('FLASK_APP')
+    FLASK_ENV = os.environ.get('FLASK_ENV')
+    FLASK_DEBUG = os.environ.get('FLASK_DEBUG')
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+class ProductionConfig:
+    # Production Only
+    REMEMBER_COOKIE_DURATION = timedelta(days=14)
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+
+class DevelopmentConfig:
+    # Development Locally
+    REMEMBER_COOKIE_DURATION = timedelta(seconds=300)
+    SQLALCHEMY_DATABASE_URI = "sqlite:///memory"

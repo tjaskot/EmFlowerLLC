@@ -1,23 +1,18 @@
 #########################
 ### Imported packages ###
 # Flask
-# flask_login - loginManager, UserMixin (provides boilerplate 4 base methods of auth)
-# flask_sqlalchemy
 # TODO: add imports and comments
 #########################
 
 from flask import Flask, render_template, request, url_for, redirect, jsonify, send_file, session #TODO: , Blueprint
-from flask_login import LoginManager, UserMixin, login_required, current_user, login_user, logout_user
-# Maybe figure out how to use postgres with heroku
+from flask_login import LoginManager, login_required, UserMixin, current_user, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
-from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
-import os, sys, plotly, json
-import chart_studio.plotly as py
-import plotly.graph_objects as go
+from werkzeug.security import generate_password_hash, check_password_hash
+import os, sys, json
 import importlib
 import logging
 import views
@@ -42,21 +37,30 @@ import views
 #   app start
 ###########################
 
-#TODO: move to folder riskapp, rn using just app
-# riskapp = Blueprint('riskapp', __name__)
-app = Flask(__name__, instance_relative_config=False)
+#TODO: move to folder EmFlowersLLC, rn using just app
+app = Flask(__name__, instance_relative_config=True)
 
-# Define User Specific Variables - riskapp package
-appName = "RiskApp Tool"
+# Define User Specific Variables - EmFlowersLLC package
+appName = "EmFlowersLLC Website"
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
-#TODO: temp secret key
-if not SECRET_KEY:
+# App Configs
+if not os.environ.get('SECRET_KEY'):
     app.secret_key = 'secret'
     print("!!!SECRET KEY LOCALLY SET!!! ...Dev Only")
+# app.config.from_object('config.Config')
+# if 'development' in os.environ:
+#     app.config.from_object('config.DevelopmentConfig')
+# else:
+#     app.config.from_object('config.ProductionConfig')
 
-# TODO: The way i want to inject configs
-# refer to app.cfg
+if 'production' in os.environ:
+    app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=14)
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+else:
+    app.config['REMEMBER_COOKIE_DURATION'] = timedelta(seconds=300)
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///memory"
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -71,30 +75,16 @@ def load_user(user_id):
 def unauthorized():
     return redirect(url_for('unauthorized'))
 
-# App Configs
-#r = FlaskRedis()
-if 'production' in os.environ:
-    app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=14)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-else:
-    app.config['REMEMBER_COOKIE_DURATION'] = timedelta(seconds=300)
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///memory"
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# Or if using app.cfg:
+# app = Flask(__name__, instance_relative_config=True)
+# app.config.from_pyfile('application.cfg', silent=True)
+#  OR
+# with app.open_instance_resource('application.cfg') as f:
+#   config = f.read()
 
 # Initalize db
 db = SQLAlchemy(app)
-
-class Config:
-     # General Config
-    SECRET_KEY = os.environ.get('SECRET_KEY')
-    FLASK_APP = os.environ.get('FLASK_APP')
-    FLASK_ENV = os.environ.get('FLASK_ENV')
-    FLASK_DEBUG = os.environ.get('FLASK_DEBUG')
-
-    # Database
-    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
-    SQLALCHEMY_TRACK_MODIFICATIONS = os.environ.get('SQLALCHEMY_TRACK_MODIFICATIONS')
+#r = FlaskRedis() # In future may want to use Redis for KeyValue items on site pages
 
 class User(UserMixin, db.Model):
     """Model for user accounts."""
@@ -113,6 +103,16 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password(self.password, password)
 
+    def validate_username(self, username):
+        validUser = User.query.filter_by(username=username.data).first()
+        if validUser is not None:
+            error = "User is not valid"
+
+    def validate_email(self, email):
+        validEmail = User.query.filter_by(email=email.data).first()
+        if validEmail is not None:
+            error = "Email is not valid"
+
     def __repr__(self):
         return '<{},{}>'.format(self.id, self.username)
 
@@ -125,7 +125,6 @@ class User(UserMixin, db.Model):
 
 # Centralized approach - removes lazy loading, loads page as needed, cached page values
 app.add_url_rule('/', view_func=views.index)
-# app.add_url_rule('/login', view_func=views.login, methods=['GET','POST'])
 app.add_url_rule('/hello', view_func=views.hello, methods=['GET'])
 app.add_url_rule('/home', view_func=views.home)
 app.add_url_rule('/generate', view_func=views.generate, methods=['POST', 'GET'])
@@ -133,7 +132,11 @@ app.add_url_rule('/contacts', view_func=views.contacts)
 app.add_url_rule('/about', view_func=views.about)
 app.add_url_rule('/datafunction', view_func=views.datafunction)
 app.add_url_rule('/unauthorized', view_func=views.unauthorized)
+# app.add_url_rule('/login', view_func=views.login, methods=['GET','POST'])
+# app.add_url_rule('/users', view_func=views.users)
+# app.add_url_rule('/signup', view_func=views.signup, methods=['GET','POST'])
 
+######################################
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'POST':
@@ -144,7 +147,6 @@ def login():
         return redirect(url_for('home'))
     return render_template('login.html')
 
-# app.add_url_rule('/users', view_func=views.users, methods=['GET','POST'])
 @app.route('/users', methods=['GET','POST'])
 def users():
     return render_template('users.html', users=User.query.all())
@@ -162,6 +164,7 @@ def signup():
             db.session.commit()
             return redirect(url_for('users'))
     return render_template('signup.html')
+#######################################
 
 @app.route('/settings')
 @login_required
@@ -179,7 +182,6 @@ def logout():
     return redirect(url_for('index'))
 
 # create logger
-#TODO: doubles out because of example.log
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 # set logging file output configuration
@@ -209,13 +211,7 @@ def clear_trailing():
 # remains here for all error loading - this works!
 @app.errorhandler(404)
 def not_found(error):
-    ##Checks to see if error is null, and catches exception
-    #try:
-    #    #This code may raise an error if nothing is not null
-    #    error = error
-    #except:
-    #    error = "This is my error."
-    #    app.logger.error("Application is passing null into loginerror function.")
+    app.logger.error("User unauthorized.")
     return render_template('notfound.html'), 404
 
 ### Unit tests ###
@@ -247,7 +243,7 @@ with app.test_request_context('/datafunction'):
     assert request.path == '/datafunction'
 ###################
 
-#   This file is being used as both main.py and riskapp.py and some overlap in init.py
+#   This file is being used as both main.py and EmFlowersLLC.py and some overlap in init.py
 if __name__ == "__main__":
     db.create_all()
     port = int(os.environ.get("PORT", 5000))

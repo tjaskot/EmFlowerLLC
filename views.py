@@ -11,7 +11,7 @@ poc4 = "Trevor"
 poc3 = "Eric"
 
 # Application Generated Routes
-#@app.route('/')
+# @app.route('/')
 def index():
     # TODO: Need to update for if session is active, then redirect for home?
     if 'username' in session:# and db.query.filter_by('id') != 'admin':
@@ -22,16 +22,16 @@ def index():
         return 'logged in'
     return redirect(url_for('login'))
 
-#@app.route('/hello', methods=['GET'])
-#Stay-Alive verification
+# Stay-Alive verification
+# @app.route('/hello', methods=['GET'])
 def hello():
     return "Return 200"
 
-#@app.route('/home')
+# @app.route('/home')
 def home():
     return render_template('index.html', bkgrnd1 = bkgrnd1, bkgrnd2d0 = bkgrnd2d0, bkgrnd2d1 = bkgrnd2d1, bkgrnd3 = bkgrnd3)
 
-#@app.route('/generate', methods=['POST', 'GET'])
+# @app.route('/generate', methods=['POST', 'GET'])
 def generate():
     error = None
     if request.method == 'POST':
@@ -42,8 +42,7 @@ def generate():
             return redirect(url_for('.not_found', error = error))
     return render_template('generate.html')
 
-
-#@app.route('/contacts')
+# @app.route('/contacts')
 #Syntax of python flask does not require variable from redirect to be passed into the below def function
 def contacts():
     sendEmail = 'false'
@@ -81,16 +80,16 @@ def contacts():
 
     return render_template('contacts.html', poc1 = poc1, poc2 = poc2, poc3 = poc3, poc4 = poc4)
 
-#@app.route('/about')
+# @app.route('/about')
 def about():
     return render_template('about.html')
 
-#@app.route('/datafunction')
+# @app.route('/datafunction')
 def datafunction():
     myVal = "myDataValue"
     return myVal
 
-#@app.route('/unauthorized')
+# @app.route('/unauthorized')
 # TODO: next step to add pass in object that returns "hey <user> you're not auth"
 def unauthorized():
     return "Hey gotta figure out how to login :)"
