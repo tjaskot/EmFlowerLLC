@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- base.html - all html files with navbar will import this file -->
+<html>
+  <head>
+    {% block head %}
+      <!-- Vendor Dependencies - CSS -->
+      <link rel="stylesheet" href={{ url_for('static', filename='css/bootstrap.min.css') }}>
+      <!-- User Defined CSS -->
+      <link rel="stylesheet" href={{ url_for('static', filename='css/common.css') }}>
+    {% endblock %}
+  </head>
+  {% block baseNavBar %}
+    <ul>
+      <li><a href="/home">Home</a></li>
+      <li><a href="/home#probstmnt">Project Overview</a></li>
+      <li><a href="/home#appbkgnd">Application Background</a></li>
+      <li><a href="/home#anlaprch">Model Approach</a></li>
+      <li><a class="active" href="/contacts">Team</a></li>
+      <li><a href="/generate">Generate</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  {% endblock %}
+  <body>
+    {% block body %}
+    {% endblock %}
+  </body>
+  <footer>
+    {% block footer %}
+    {% endblock %}
+  </footer>
+  {% block basescripts %}
+    <!-- Vendor Dependencies - JS -->
+    <script type="text/javascript" src={{ url_for('static', filename='js/jquery.min.js') }}></script>
+    <script type="text/javascript" src={{ url_for('static', filename='js/bootstrap.min.js') }}></script>
+    <!-- D3.js -->
+    <script type="text/javascript" src={{ url_for('static', filename='js/d3.min.js') }}></script>
+    <!-- User Defined Scripts -->
+    <script type="text/javascript" src={{ url_for('static', filename='js/common.js') }}></script>
+  {% endblock %}
+</html>

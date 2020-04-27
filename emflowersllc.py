@@ -1,9 +1,5 @@
-#########################
-### Imported packages ###
-# Flask
-# TODO: add imports and comments
-#########################
-
+##########################
+### Imported packages ####
 from flask import Flask, render_template, request, url_for, redirect, jsonify, send_file, session #TODO: , Blueprint
 from flask_login import LoginManager, login_required, UserMixin, current_user, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
@@ -16,6 +12,8 @@ import os, sys, json
 import importlib
 import logging
 import views
+import variables
+###########################
 
 ###########################
 ### Order of operations ###
@@ -132,11 +130,8 @@ app.add_url_rule('/contacts', view_func=views.contacts)
 app.add_url_rule('/about', view_func=views.about)
 app.add_url_rule('/datafunction', view_func=views.datafunction)
 app.add_url_rule('/unauthorized', view_func=views.unauthorized)
-# app.add_url_rule('/login', view_func=views.login, methods=['GET','POST'])
-# app.add_url_rule('/users', view_func=views.users)
-# app.add_url_rule('/signup', view_func=views.signup, methods=['GET','POST'])
 
-######################################
+###### Session Cookie Needed ##########
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'POST':
@@ -166,6 +161,7 @@ def signup():
     return render_template('signup.html')
 #######################################
 
+##########  Login Required ############
 @app.route('/settings')
 @login_required
 def settings():
@@ -180,26 +176,23 @@ def logout():
     session.pop('username', None)
     logout_user()
     return redirect(url_for('index'))
+#######################################
 
-# create logger
+###### Logger Creation & Config #######
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-# set logging file output configuration
-#logger.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
-# create console handler and set level to debug
+# logger.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 consoleHandler = logging.StreamHandler()
 consoleHandler.setLevel(logging.DEBUG)
-# create formatter
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-# add formatter to consoleHandler
 consoleHandler.setFormatter(formatter)
-# add ch to logger
 logger.addHandler(consoleHandler)
-# log bsaic info
+# log basic info
 logger.info("Initial Startup of: " + appName)
 logger.debug('This message should go to the log file')
 logger.warning('Warning: Test')
+#######################################
 
+######## URL Route Handling ###########
 # reamins here for each load - don't know if correct, but seems right
 @app.before_request
 def clear_trailing():
@@ -213,8 +206,9 @@ def clear_trailing():
 def not_found(error):
     app.logger.error("User unauthorized.")
     return render_template('notfound.html'), 404
+#######################################
 
-### Unit tests ###
+############# Unit tests ##############
 # For application below (unit test code coverage +70%)
 # Validate that all url's are responsive and identify as themselves
 with app.test_request_context('/hello', method='GET'):
@@ -241,7 +235,7 @@ with app.test_request_context('/home'):
 
 with app.test_request_context('/datafunction'):
     assert request.path == '/datafunction'
-###################
+#######################################
 
 #   This file is being used as both main.py and EmFlowersLLC.py and some overlap in init.py
 if __name__ == "__main__":

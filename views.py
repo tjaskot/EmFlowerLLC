@@ -1,14 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect, session
-
-# User defined variables - views package
-bkgrnd1 = "Department of Defense (DOD)"
-bkgrnd2d0 = "- No solution mimicking"
-bkgrnd2d1 = "- No software or simulation"
-bkgrnd3 = "ODASA-CE analysis of projects"
-poc1 = "Derek"
-poc2 = "Leo"
-poc4 = "Trevor"
-poc3 = "Eric"
+import variables
 
 # Application Generated Routes
 # @app.route('/')
@@ -29,7 +20,7 @@ def hello():
 
 # @app.route('/home')
 def home():
-    return render_template('index.html', bkgrnd1 = bkgrnd1, bkgrnd2d0 = bkgrnd2d0, bkgrnd2d1 = bkgrnd2d1, bkgrnd3 = bkgrnd3)
+    return render_template('index.html', bkgrnd1 = variables.bkgrnd1, bkgrnd2d0 = variables.bkgrnd2d0, bkgrnd2d1 = variables.bkgrnd2d1, bkgrnd3 = variables.bkgrnd3)
 
 # @app.route('/generate', methods=['POST', 'GET'])
 def generate():
@@ -78,7 +69,7 @@ def contacts():
         s.sendmail(sender, recipient, msg.as_string())
         s.quit()
 
-    return render_template('contacts.html', poc1 = poc1, poc2 = poc2, poc3 = poc3, poc4 = poc4)
+    return render_template('contacts.html', poc1 = variables.poc1, poc2 = variables.poc2)
 
 # @app.route('/about')
 def about():
