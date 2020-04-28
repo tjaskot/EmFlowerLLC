@@ -4,22 +4,27 @@
 {% block head %}
   {{ super() }}
   <!-- File Specific CSS -->
-  <link rel="stylesheet" href="../static/css/contacts.css">
+  <link rel="stylesheet" href={{ url_for('static', filename='css/contacts.css') }}>
 {% endblock %}
 
-<!-- Navigation bar -->
-{% block baseNavBar %}
+{% block header %}
   {{ super() }}
+  <title>Contact Information</title>
+  <div class="header">
+    <h2 class="center paddingtop">Em's Flower Shop</h2>
+    <p class="center">Contacts for Em's flower creations.</p>
+  </div>
+{% endblock %}
+
+<!-- This is the navigation bar -->
+{% block basenavbar %}
+  {{ super() }}
+  <li><a class="active" href="/contacts">Team</a></li>
 {% endblock %}
 <!-- end of navbar -->
 
 {% block body %}
 <!--TODO: <body background="../static/images/dasacearmy.png" class="doapng" alt="Doa Watermark">-->
-  <title>Contact Information</title>
-  <div class="header">
-          <h2 class="center paddingtop">Em's Flower Shop</h2>
-          <p class="center">This website houses the photos of Em's flower creations.</p>
-  </div>
   <h2 class="container">Points of Contact for this Project</h2>
   <section class="bkgw">
   <div class="navOffCntr">
@@ -42,7 +47,7 @@
   {{ super() }}
 {% endblock %}
 
-{% block baseScripts %}
+{% block basecripts %}
   {{ super() }}
   <!-- File Specific Scripts -->
   <script type="text/javascript" src={{ url_for('static', filename='js/contacts.js') }}></script>

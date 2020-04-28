@@ -1,40 +1,52 @@
 <!DOCTYPE html>
-<!-- generate.html -->
-<html>
-  <head>
-	  <!-- Vendor Dependencies -->
-	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% extends "base.html" %}
+<!-- login.html -->
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href={{ url_for('static', filename='css/login.css') }}>
+{% endblock %}
 
-	  <!-- User Defined CSS -->
-          <link rel="stylesheet" href="../static/css/common.css">
-          <link rel="stylesheet" href="../static/css/login.css">
-  </head>
+{% block header %}
+  {{ super() }}
   <body background="../static/images/dasacearmy.png" class="doapng" alt="Doa Watermark">
-    <title>About</title>
-    <div class="header">
-                  <h2 class="center paddingtop">Software Development Risk Analysis Application - Login</h2>
-            <p class="center">Please login to the application.</p>
+  <title>Login</title>
+  <div class="header">
+    <h2 class="center paddingtop">Software Development Risk Analysis Application - Login</h2>
+    <p class="center">Please login to the application.</p>
+  </div>
+{% endblock %}
+
+{% if error %}
+<p class="bkgw error"><strong>Error:</strong> {{ error }} </p>
+{% endif %}
+
+<!-- This is the navigation bar -->
+{% block basenavbar %}
+  <!-- Blank Overwrite - Login Only -->
+{% endblock %}
+<!-- end of navbar -->
+
+{% block header %}
+  <!-- Blank Overwrite - Login Only -->
+{% endblock %}
+
+{% block body %}
+  <form action="/login" method="POST">
+    <div id="loginpost" class="usrlogn">
+	    <input type="username" name="username" placeholder="Username" value="{{ request.form.username }}">
+	    </br>
+	    <input type="password" name="password" placeholder="Password" value="{{ request.form.password }}">
+	    </br>
+	    <input type="submit" value="Login">
     </div>
+  </form>
+{% endblock %}
 
-    {% if error %}
-    <p class="bkgw error"><strong>Error:</strong> {{ error }} </p>
-    {% endif %}
+{% block footer %}
+  {{ super() }}
+{% endblock %}
 
-    <form action="/login" method="POST">
-	    <div id="loginpost" class="usrlogn">
-		    <input type="username" name="username" placeholder="Username" value="{{ request.form.username }}">
-		    </br>
-		    <input type="password" name="password" placeholder="Password" value="{{ request.form.password }}">
-		    </br>
-		    <input type="submit" value="Login">
-	    </div>
-    </form>
-
-  </body>
-
-  <!-- User Defined Scripts -->
-  <!-- The reason the author uses a url_for static resource instead of relative path for js as in html style not based on Flask is to ensure that the javascript is loaded after the initial window.pageload. The result is that the div's will be organized in proper order with proper parent/child scope inheritance. -->
+{% block basescripts %}
+  {{ super() }}
   <script type="text/javascript" src={{ url_for('static', filename='js/login.js') }}></script>
-  <script type="text/javascript" src={{ url_for('static', filename='js/common.js') }}></script>
-
-</html>
+{% endblock %}
