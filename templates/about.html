@@ -15,11 +15,12 @@
   </div>
 {% endblock %}
 
-<!-- This is the navigation bar -->
+<!-- Navigation bar -->
 {% block basenavbar %}
   {{ super() }}
-  <script>addActive({{ navBarEl }})</script>
-  <!-- <li><a class="active" href="/about">About</a></li> -->
+  <script>
+    window.onload = function() {addActive({{ navBarEl }})};
+  </script>
 {% endblock %}
 <!-- end of navbar -->
 
@@ -230,7 +231,7 @@
 {% endblock %}
 
 {% block basescripts %}
-  <!-- User Defined Scripts -->
+  {{ super() }}
   <!-- The reason the author uses a url_for static resource instead of relative path for js as in html style not based on Flask is to ensure that the javascript is loaded after the initial window.pageload. The result is that the div's will be organized in proper order with proper parent/child scope inheritance. -->
   <script type="text/javascript" src={{ url_for('static', filename='js/about.js') }}></script>
   <script type="text/javascript" src={{ url_for('static', filename='js/common.js') }}></script>

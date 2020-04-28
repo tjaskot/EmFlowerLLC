@@ -6,16 +6,6 @@
   <link rel="stylesheet" href={{ url_for('static', filename='css/login.css') }}>
 {% endblock %}
 
-{% block header %}
-  {{ super() }}
-  <body background="../static/images/dasacearmy.png" class="doapng" alt="Doa Watermark">
-  <title>Login</title>
-  <div class="header">
-    <h2 class="center paddingtop">Software Development Risk Analysis Application - Login</h2>
-    <p class="center">Please login to the application.</p>
-  </div>
-{% endblock %}
-
 {% if error %}
 <p class="bkgw error"><strong>Error:</strong> {{ error }} </p>
 {% endif %}

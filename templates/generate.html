@@ -16,11 +16,12 @@
   </div>
 {% endblock %}
 
-<!-- This is the navigation bar -->
+<!-- Navigation bar -->
 {% block basenavbar %}
   {{ super() }}
-  <script>addActive({{ navBarEl }})</script>
-  <!-- <li><a class="active" href="/generate">Generate</a></li> -->
+  <script>
+    window.onload = function() {addActive({{ navBarEl }})};
+  </script>
 {% endblock %}
 <!-- end of navbar -->
 

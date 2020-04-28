@@ -5,8 +5,8 @@ function windowSize() {
 }
 
 function addActive(domElAddActive) {
-  var element = document.getElementById(domElAddActive);
-  if (! element.classList.contains("active")) {
-    element.classList.add("active");
+  // python passes the actual dom element
+  if (! domElAddActive.classList.contains("active")) {
+    domElAddActive.classList.add("active");
   }
 }

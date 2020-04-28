@@ -19,8 +19,9 @@
 <!-- Navigation bar -->
 {% block basenavbar %}
   {{ super() }}
-  <script>addActive({{ navBarEl }})</script>
-  <!-- <li><a class="active" href="/home">Home</a></li> -->
+  <script>
+    window.onload = function() {addActive({{ navBarEl }})};
+  </script>
 {% endblock %}
 <!-- end of navbar -->
 
@@ -125,5 +126,6 @@
 {% endblock %}
 
 {% block basescripts %}
+  {{ super() }}
   <script type="text/javascript" src={{ url_for('static', filename='js/emflowersllc.js') }}></script>
 {% endblock %}
