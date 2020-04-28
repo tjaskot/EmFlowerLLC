@@ -19,7 +19,8 @@
 <!-- This is the navigation bar -->
 {% block basenavbar %}
   {{ super() }}
-  <li><a class="active" href="/contacts">Team</a></li>
+  <script>addActive({{ navBarEl }})</script>
+  <!-- <li><a class="active" href="/contacts">Team</a></li> -->
 {% endblock %}
 <!-- end of navbar -->
 

@@ -3,3 +3,10 @@ function windowSize() {
   var w = window.innerWidth;
   var h = window.innerHeight;
 }
+
+function addActive(domElAddActive) {
+  var element = document.getElementById(domElAddActive);
+  if (! element.classList.contains("active")) {
+    element.classList.add("active");
+  }
+}
