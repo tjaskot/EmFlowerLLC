@@ -144,7 +144,7 @@ def login():
 
 @app.route('/users', methods=['GET','POST'])
 def users():
-    return render_template('users.html', users=User.query.all())
+    return render_template('users.htm', users=User.query.all())
 
 @app.route('/signup', methods=['GET','POST'])
 def signup():
@@ -158,7 +158,7 @@ def signup():
             db.session.add(users)
             db.session.commit()
             return redirect(url_for('users'))
-    return render_template('signup.html')
+    return render_template('signup.htm')
 #######################################
 
 ##########  Login Required ############
@@ -205,7 +205,7 @@ def clear_trailing():
 @app.errorhandler(404)
 def not_found(error):
     app.logger.error("User unauthorized.")
-    return render_template('notfound.html'), 404
+    return render_template('notfound.htm'), 404
 #######################################
 
 ############# Unit tests ##############
