@@ -8,19 +8,11 @@
 
 {% block header %}
   {{ super() }}
-  <title>About</title>
-  <div class="header">
-          <h2 class="center paddingtop">Em's Flower Shop</h2>
-          <p class="center">This site is designed to show the photos and creations by Em.</p>
-  </div>
 {% endblock %}
 
 <!-- Navigation bar -->
 {% block basenavbar %}
   {{ super() }}
-  <script>
-    window.onload = function() {addActive({{ navBarEl }})};
-  </script>
 {% endblock %}
 <!-- end of navbar -->
 

@@ -21,7 +21,7 @@
         <p class="lead">This site is designed to show photos and creations by Em.</p>
         <hr class="my-4">
         <p class="lead">
-          <a class="btn btn-primary btn-sm" href="#" role="button">Learn More</a>
+          <a class="btn btn-info btn-sm" href="#"" role="button" onclick="openNav()">Learn More</a>
         </p>
       </div>
     {% endblock %}
@@ -48,6 +48,16 @@
       <li><a id="generateLi" href="/generate">Generate</a></li>
       <li><a id="aboutLi" href="/about">About</a></li>
     </ul>
+
+    <script>
+      if (window.matchMedia("(max-width: 719px)") === true) {
+        window.onload = function() {addActive({{ navBarEl }})};
+        console.log("add Side active");
+      } else {
+        window.onload = function() {addActive({{ sideBarEl }})};
+        console.log("add Top active");
+      }
+    </script>
   {% endblock %}
 
   <body>

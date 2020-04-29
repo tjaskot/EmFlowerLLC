@@ -20,7 +20,7 @@ def hello():
 
 # @app.route('/home')
 def home():
-    return render_template('index.htm', bkgrnd1 = variables.bkgrnd1, bkgrnd2d0 = variables.bkgrnd2d0, bkgrnd2d1 = variables.bkgrnd2d1, bkgrnd3 = variables.bkgrnd3, navBarEl="homeLi")
+    return render_template('index.htm', bkgrnd1 = variables.bkgrnd1, bkgrnd2d0 = variables.bkgrnd2d0, bkgrnd2d1 = variables.bkgrnd2d1, bkgrnd3 = variables.bkgrnd3, navBarEl="homeLi", sideBarEl="sideHomeLi")
 
 # @app.route('/generate', methods=['POST', 'GET'])
 def generate():
@@ -31,7 +31,7 @@ def generate():
         else:
             error = "Invalid username/password"
             return redirect(url_for('.not_found', error = error))
-    return render_template('generate.htm', navBarEl="generateLi")
+    return render_template('generate.htm', navBarEl="generateLi", sideBarEl="sideGenerateLi")
 
 # @app.route('/contacts')
 #Syntax of python flask does not require variable from redirect to be passed into the below def function
@@ -69,11 +69,11 @@ def contacts():
         s.sendmail(sender, recipient, msg.as_string())
         s.quit()
 
-    return render_template('contacts.htm', poc1 = variables.poc1, poc2 = variables.poc2, navBarEl="contactsLi")
+    return render_template('contacts.htm', poc1 = variables.poc1, poc2 = variables.poc2, navBarEl="contactsLi", sideBarEl="sideContactsLi")
 
 # @app.route('/about')
 def about():
-    return render_template('about.htm', navBarEl="aboutLi")
+    return render_template('about.htm', navBarEl="aboutLi", sideBarEl="sideAboutLi")
 
 # @app.route('/datafunction')
 def datafunction():

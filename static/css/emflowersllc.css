@@ -31,17 +31,17 @@ img:hover {
 }
 
 @media screen and (max-width: 800px) {
-  .column {
+  .column.indexGrid {
     flex: 50%;
     max-width: 50%;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .column {
+  .column.indexGrid {
     max-width: 100%;
   }
-  .row {
+  .row .indexGrid {
     padding-left: 5vw;
   }
 }
