@@ -4,9 +4,19 @@ function windowSize() {
   var h = window.innerHeight;
 }
 
+// python passes the actual dom element
 function addActive(domElAddActive) {
-  // python passes the actual dom element
+  // console.log("added active")
+  // console.log(domElAddActive)
   if (! domElAddActive.classList.contains("active")) {
     domElAddActive.classList.add("active");
   }
+}
+
+function openNav() {
+  document.getElementById("sideNavBar").style.width = "200px";
+}
+
+function closeNav() {
+  document.getElementById("sideNavBar").style.width = "0";
 }

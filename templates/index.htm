@@ -10,22 +10,24 @@
 
 {% block header %}
   {{ super() }}
-  <title>Em's Flower Shop Overview</title>
-  <!-- <div id="headerCenterTitle" class="inLineBlok headerCenter"> -->
-  <h2 class="center paddingtop">Em's Flower Shop</h2>
-  <p class="center">This site is designed to show the photos and creations by Em.</p>
+  <script>
+    // TODO: JS if statement to find side or nave bar by media width
+    window.onload = function() {addActive({{ sideBarEl }})};
+  </script>
 {% endblock %}
 
 <!-- Navigation bar -->
 {% block basenavbar %}
   {{ super() }}
   <script>
+    // TODO: JS if statement to find side or nave bar by media width
     window.onload = function() {addActive({{ navBarEl }})};
   </script>
 {% endblock %}
 <!-- end of navbar -->
 
 {% block body %}
+  {{ super() }}
   <section class="bkgw">
     </br>
     <div class="linkShift" id="probstmnt"></div>
@@ -60,6 +62,26 @@
     </br>
   </section>
 
+  <section class="container">
+    <div class="row indexGrid">
+      <div class="column col-xs-4">
+        <img src="{{ url_for('static', filename='images/purpleWhiteStar.jpg') }}" />
+        <img src={{ url_for('static', filename='images/singleWhite.jpg') }} />
+        <img src={{ url_for('static', filename='images/littleYellow.jpg') }} />
+      </div>
+      <div class="column col-xs-4">
+        <img src="{{ url_for('static', filename='images/purpleMinis.jpg') }}" />
+        <img src={{ url_for('static', filename='images/dualWhite.jpg') }} />
+        <img src="{{ url_for('static', filename='images/whiteDroop.jpg') }}" />
+      </div>
+      <div class="column col-xs-4">
+        <img src="{{ url_for('static', filename='images/redGreenTree.jpg') }}" />
+        <img src="{{ url_for('static', filename='images/redYellowSkini.jpg') }}" />
+        <img src="{{ url_for('static', filename='images/yellowDualDroop.jpg') }}" />
+      </div>
+    </div>
+  </section>
+
   <!--This height div added so that screen links can focus on paragraph and the browser has additional view height for adjustments-->
   <div style="height: 25vh;"></div>
 
@@ -74,13 +96,13 @@
   	  <p>The numbers, respectively, for this dataset are 5, 10, 27.5, 27.5, 15, and 15.</p>
   	  <!--Surrouding the images with p tags so that css will make them reactive-->
   	  <p class="center">
-  	  <img src="{{ url_for('static', filename='images/Schedule1.png') }}" />
+  	  <!-- <img src="{{ url_for('static', filename='images/Schedule1.png') }}" /> -->
   	  </p>
   	  <p class="center">
-  	  <img src="{{ url_for('static', filename='images/Risk1.png') }}" />
+  	  <!-- <img src="{{ url_for('static', filename='images/Risk1.png') }}" /> -->
   	  </p>
   	  <p class="center">
-  	  <img src="{{ url_for('static', filename='images/Cost1.png') }}" />
+  	  <!-- <img src="{{ url_for('static', filename='images/Cost1.png') }}" /> -->
   	  </p>
 
   	  <!--Using break 7 times to add extra space for visuals in between each grouping within the section-->
@@ -90,13 +112,13 @@
   	  <p>The numbers, respectively, for this dataset are 5, 0, 50, 30, 5, and 5.</p>
   	  <!--Surrouding the images with p tags so that css will make them reactive-->
   	  <p class="center">
-  	  <img src="{{ url_for('static', filename='images/Schedule2.png') }}" />
+  	  <!-- <img src="{{ url_for('static', filename='images/Schedule2.png') }}" /> -->
   	  </p>
   	  <p class="center">
-  	  <img src="{{ url_for('static', filename='images/Risk2.png') }}" />
+  	  <!-- <img src="{{ url_for('static', filename='images/Risk2.png') }}" /> -->
   	  </p>
   	  <p class="center">
-  	  <img src="{{ url_for('static', filename='images/Cost2.png') }}" />
+  	  <!-- <img src="{{ url_for('static', filename='images/Cost2.png') }}" /> -->
   	  </p>
 
   	  <!--Using break 7 times to add extra space for visuals in between each grouping within the section-->
@@ -108,13 +130,13 @@
   	  <p>The numbers, respectively, for this dataset are 5, 5, 15, 15, 30, and 30.</p>
   	  <!--Surrouding the images with p tags so that css will make them reactive-->
   	  <p class="center">
-  	  <img src="{{ url_for('static', filename='images/Schedule3.png') }}" />
+  	  <!-- <img src="{{ url_for('static', filename='images/Schedule3.png') }}" /> -->
   	  </p>
   	  <p class="center">
-  	  <img src="{{ url_for('static', filename='images/Risk3.png') }}" />
+  	  <!-- <img src="{{ url_for('static', filename='images/Risk3.png') }}" /> -->
   	  </p>
   	  <p class="center">
-  	  <img src="{{ url_for('static', filename='images/Cost3.png') }}" />
+  	  <!-- <img src="{{ url_for('static', filename='images/Cost3.png') }}" /> -->
   	  </p>
   	  </br>
     </div>

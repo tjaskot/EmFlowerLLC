@@ -1,33 +1,119 @@
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  top: 0;
+/* Side Navigation Bar */
+@media screen and (min-width: 720px) {
+  .topNavBar {
+    display: none;
+  }
+
+  .menuToggle {
+    font-size: 30px;
+    cursor: pointer;
+    padding: 1vh;
+  }
+
+  .sideNavBar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sideNavBar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .sideNavBar a:hover {
+    color: #f1f1f1;
+  }
+
+  .sideNavBar .closeBtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+}
+/* End Side Navigation Bar */
+
+/* Top Navigation Bar */
+@media screen and (max-width: 719px){
+  .sideNavBar{
+    display: none;
+  }
+
+  .menuToggle {
+    display: none;
+  }
+
+  .jumbotron {
+    margin-bottom: 0;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 10px 12px;
+    text-decoration: none;
+  }
+
+  li a:hover {
+    background-color: #111;
+  }
+
+  li:last-child {
+    border-right: 5px;
+    float: right;
+  }
+}
+/* End Top Navigation Bar */
+
+/* Max media is for reactive display */
+@media screen and (max-width: 719px) {
+  .userPlotlyChart {
+    width: 100%;
+    height: 85vh;
+  }
 }
 
-li {
-  float: left;
+@media screen and (min-width: 720px) and (max-width: 1079px) {
+  .userPlotlyChart {
+    width: 600px;
+    height: 500px;
+  }
 }
 
-li a {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #111;
-}
-
-li:last-child {
-  border-right: 5px;
-  float: right;
+@media screen and (min-width: 1080px) {
+  .userPlotlyChart {
+    width: 800px;
+    height: 650px;
+  }
 }
 
 /* This px padding accomodates for bootstrap negative left/right row margin of 15px, and adds plus 5 for nicer visuals */
@@ -39,7 +125,7 @@ li:last-child {
   background-color: cadetblue;
 }
 
-.inLineBlok { 
+.inLineBlok {
   display: inline-block;
 }
 
@@ -64,7 +150,7 @@ li:last-child {
 }
 
 .doapng {
-  background-position-x: center; 
+  background-position-x: center;
 }
 
 .redtext {
@@ -86,26 +172,4 @@ li:last-child {
 
 .linkShift {
   padding-bottom: 15vh;
-}
-
-/* Max media is for reactive display */
-@media screen and (max-width: 599px) {
-  .userPlotlyChart {
-    width: 100%;
-    height: 85vh;
-  }
-}
-
-@media screen and (min-width: 600px) and (max-width: 800px) {
-  .userPlotlyChart {
-    width: 600px;
-    height: 500px;
-  }
-}
-
-@media screen and (min-width: 801px) {
-  .userPlotlyChart {
-    width: 800px;
-    height: 650px;
-  }
 }
