@@ -1,6 +1,6 @@
 ##########################
 ### Imported packages ####
-from flask import Flask, render_template, request, url_for, redirect, jsonify, send_file, session #TODO: , Blueprint
+from flask import Flask, render_template, request, url_for, redirect, jsonify, send_file #TODO: session
 from flask_login import LoginManager, login_required, UserMixin, current_user, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from email.mime.multipart import MIMEMultipart
@@ -136,7 +136,7 @@ app.add_url_rule('/unauthorized', view_func=views.unauthorized)
 def login():
     if request.method == 'POST':
         userFormName = request.form['username']
-        session['username'] = userFormName
+        # session['username'] = userFormName
         # Uses the session for username passing rather than in url or directly in html
         login_user(User.query.filter_by(username=userFormName).first())
         return redirect(url_for('home'))
@@ -173,7 +173,7 @@ def settings():
 @login_required
 def logout():
     # logout_user() # from flask_login logout_user
-    session.pop('username', None)
+    # session.pop('username', None)
     logout_user()
     return redirect(url_for('index'))
 #######################################

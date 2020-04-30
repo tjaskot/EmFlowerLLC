@@ -11,7 +11,7 @@ def index():
         db.get_pass() #refer to something like this for password
         db.query.filter_by('password')
         return 'logged in'
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
 
 # Stay-Alive verification
 # @app.route('/hello', methods=['GET'])
