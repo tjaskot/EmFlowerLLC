@@ -236,7 +236,7 @@ with app.test_request_context('/datafunction'):
 
 #   This file is being used as both main.py and EmFlowersLLC.py and some overlap in init.py
 if __name__ == "__main__":
-    manager.run()
+#    manager.run()
     db.create_all()
     port = int(os.environ.get("PORT", 5000))
     app.run(port=port)
