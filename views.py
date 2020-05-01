@@ -20,7 +20,7 @@ def hello():
 
 # @app.route('/home')
 def home():
-    return render_template('index.htm', bkgrnd1 = variables.bkgrnd1, bkgrnd2d0 = variables.bkgrnd2d0, bkgrnd2d1 = variables.bkgrnd2d1, bkgrnd3 = variables.bkgrnd3, navBarEl="homeLi", sideBarEl="sideHomeLi")
+    return render_template('index.html', bkgrnd1 = variables.bkgrnd1, bkgrnd2d0 = variables.bkgrnd2d0, bkgrnd2d1 = variables.bkgrnd2d1, bkgrnd3 = variables.bkgrnd3, navBarEl="homeLi", sideBarEl="sideHomeLi")
 
 # @app.route('/generate', methods=['POST', 'GET'])
 def generate():

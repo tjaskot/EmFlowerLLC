@@ -3,12 +3,14 @@
 from flask import Flask, render_template, request, url_for, redirect, jsonify, send_file #TODO: session
 from flask_login import LoginManager, login_required, UserMixin, current_user, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from datetime import timedelta
 from werkzeug.security import generate_password_hash, check_password_hash
-import os, sys, json
+import os, sys, json, psycopg2
 import importlib
 import logging
 import views
@@ -42,23 +44,29 @@ app = Flask(__name__, instance_relative_config=True)
 appName = "EmFlowersLLC Website"
 
 # App Configs
-if not os.environ.get('SECRET_KEY'):
+if not os.environ.get('SECRET_KEY') and 'production' not in os.environ:
     app.secret_key = 'secret'
-    print("!!!SECRET KEY LOCALLY SET!!! ...Dev Only")
-# app.config.from_object('config.Config')
-# if 'development' in os.environ:
-#     app.config.from_object('config.DevelopmentConfig')
-# else:
-#     app.config.from_object('config.ProductionConfig')
-
-if 'production' in os.environ:
-    app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=14)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-else:
     app.config['REMEMBER_COOKIE_DURATION'] = timedelta(seconds=300)
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///memory"
+    print("!!!SECRET KEY LOCALLY SET!!! ...Dev Only")
+else:
+    app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=14)
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///memory"
+#SQLALCHEMY_DATABASE_URI = os.environ.get['DATABASE_URL']
+#DATABASE_URL = os.environ['DATABASE_URL']
+#app.config['DATABASE_URL'] = DATABASE_URL
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://qigrsimgrdwmrp:d22e5ad57160b685561b78c099167fcbd49a42c3a718de61bf785126aca321bf@ec2-52-6-143-153.compute-1.amazonaws.com:5432/depm009vdoa4em"
+DATABASE_URL = "postgres://qigrsimgrdwmrp:d22e5ad57160b685561b78c099167fcbd49a42c3a718de61bf785126aca321bf@ec2-52-6-143-153.compute-1.amazonaws.com:5432/depm009vdoa4em"
+app.config['DATABASE_URL'] = DATABASE_URL
+psqlconn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+#r = FlaskRedis() # In future may want to use Redis for KeyValue items on site pages
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -72,17 +80,6 @@ def load_user(user_id):
 @login_manager.unauthorized_handler
 def unauthorized():
     return redirect(url_for('unauthorized'))
-
-# Or if using app.cfg:
-# app = Flask(__name__, instance_relative_config=True)
-# app.config.from_pyfile('application.cfg', silent=True)
-#  OR
-# with app.open_instance_resource('application.cfg') as f:
-#   config = f.read()
-
-# Initalize db
-db = SQLAlchemy(app)
-#r = FlaskRedis() # In future may want to use Redis for KeyValue items on site pages
 
 class User(UserMixin, db.Model):
     """Model for user accounts."""
@@ -239,6 +236,7 @@ with app.test_request_context('/datafunction'):
 
 #   This file is being used as both main.py and EmFlowersLLC.py and some overlap in init.py
 if __name__ == "__main__":
+    manager.run()
     db.create_all()
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(port=port)
