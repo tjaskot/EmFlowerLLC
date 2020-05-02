@@ -8,7 +8,7 @@ function windowSize() {
 function addActive(domElAddActive) {
   // console.log(domElAddActive)
   if (! domElAddActive.classList.contains("active")) {
-    console.log("added active")
+//    console.log("added active")
     domElAddActive.classList.add("active");
   }
 }

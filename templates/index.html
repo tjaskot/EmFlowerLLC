@@ -20,72 +20,70 @@
 
 {% block body %}
   {{ super() }}
+  <section class="parallax">
+     <div class="container">
+        <div class="linkShift" id="probstmnt"></div>
+        <div class="navOffCntr">
+          <h5 class="center alicebluetext">
+          PROBLEM STATEMENT
+          </h5>
+          <p class="alicebluetext">
+      Software development deficiencies in the DOD drive cost overruns and delay in capability delivery. NISEC does not have a reliable analytic method for projecting risk of delays or cost overruns. This project aims to provide an analytic framework and initial capability product to fill this capability gap.
+          </p>
+        </div>
+
+        <div class="linkShift" id="appbkgnd"></div>
+        <div class="navOffCntr">
+          <h5 class="center alicebluetext">BACKGROUND</h5>
+          {% for bkgdvar in [bkgrnd1, bkgrnd2d0, bkgrnd2d1, bkgrnd3] %}
+            <p class="alicebluetext">{{ bkgdvar }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="linkShift" id="anlaprch"></div>
+        <div class="navOffCntr">
+          <h5 class="center alicebluetext">ANALYTIC APPROACH</h5>
+          <p class="alicebluetext">
+      Independently develop discrete event simulation for the accomplishment of project tasks ultimately calculated by sprint and epic.
+          </p>
+        </div>
+     </div>
+  </section>
+
   <section class="bkgw">
-    </br>
-    <div class="linkShift" id="probstmnt"></div>
-    <div class="navOffCntr">
-  	  <h5 class="center">
-  	  PROBLEM STATEMENT
-  	  </h5>
-  	  <p>
-  	  </br>
-  Software development deficiencies in the DOD drive cost overruns and delay in capability delivery. NISEC does not have a reliable analytic method for projecting risk of delays or cost overruns. This project aims to provide an analytic framework and initial capability product to fill this capability gap.
-  	  </p>
+    <div class="container">
+        <div class="emgridmargin"></div>
+        <div class="row indexGrid flex">
+          <div class="column indexGrid">
+            <img src="{{ url_for('static', filename='images/purpleWhiteStar500.jpg') }}" />
+            <img src={{ url_for('static', filename='images/singleWhite500.jpg') }} />
+            <img src={{ url_for('static', filename='images/littleYellow500.jpg') }} />
+          </div>
+          <div class="column indexGrid">
+            <img src="{{ url_for('static', filename='images/purpleMinis500.jpg') }}" />
+            <img src={{ url_for('static', filename='images/dualWhite500.jpg') }} />
+            <img src="{{ url_for('static', filename='images/whiteDroop500.jpg') }}" />
+          </div>
+          <div class="column indexGrid">
+            <img src="{{ url_for('static', filename='images/redGreenTree500.jpg') }}" />
+            <img src="{{ url_for('static', filename='images/redYellowSkini500.jpg') }}" />
+            <img src="{{ url_for('static', filename='images/yellowDualDroop500.jpg') }}" />
+          </div>
+        </div>
     </div>
-
-    <div class="linkShift" id="appbkgnd"></div>
-    <div class="navOffCntr">
-  	  <h5 class="center">BACKGROUND</h5>
-  	  </br>
-      <p>{{ bkgrnd1 }}</p>
-      <p>{{ bkgrnd2d0 }}</p>
-      <p>{{ bkgrnd2d1 }}</p>
-      <p>{{ bkgrnd3 }}</p>
-    </div>
-
-    <div class="linkShift" id="anlaprch"></div>
-    <div class="navOffCntr">
-  	  <h5 class="center">ANALYTIC APPROACH</h5>
-  	  <p>
-  	  </br>
-  Independently develop discrete event simulation for the accomplishment of project tasks ultimately calculated by sprint and epic.
-  	  </br>
-    </div>
-    </br>
+    <div style="height: 10vh;"></div>
   </section>
 
-  <section class="container">
-    <div class="row indexGrid">
-      <div class="column col-xs-4 indexGrid">
-        <img src="{{ url_for('static', filename='images/purpleWhiteStar.jpg') }}" />
-        <img src={{ url_for('static', filename='images/singleWhite.jpg') }} />
-        <img src={{ url_for('static', filename='images/littleYellow.jpg') }} />
-      </div>
-      <div class="column col-xs-4 indexGrid">
-        <img src="{{ url_for('static', filename='images/purpleMinis.jpg') }}" />
-        <img src={{ url_for('static', filename='images/dualWhite.jpg') }} />
-        <img src="{{ url_for('static', filename='images/whiteDroop.jpg') }}" />
-      </div>
-      <div class="column col-xs-4 indexGrid">
-        <img src="{{ url_for('static', filename='images/redGreenTree.jpg') }}" />
-        <img src="{{ url_for('static', filename='images/redYellowSkini.jpg') }}" />
-        <img src="{{ url_for('static', filename='images/yellowDualDroop.jpg') }}" />
-      </div>
-    </div>
-  </section>
-
-  <!--This height div added so that screen links can focus on paragraph and the browser has additional view height for adjustments-->
-  <div style="height: 25vh;"></div>
-
-  <section class="bkgw"> <!--Contains example variable dial charts-->
+  <section class="parallaxemflowersllc"> <!--Contains example variable dial charts-->
     <div class="navOffCntr">
-  	  <h5 class="center">Example Output - 3 Sets of Data</h5>
+      <div class="emgridmargin"></div>
+  	  <h5 class="center alicebluetext">Example Output - 3 Sets of Data</h5>
   	  </br>
-  	  <p>From this information the users can gather that Schedule, Risk, and Cost are associated to the input data presented to the application algorithm, located in the Generate tab.</p>
+  	  <p class="alicebluetext">From this information the users can gather that Schedule, Risk, and Cost are associated to the input data presented to the application algorithm, located in the Generate tab.</p>
   	  </br>
 
-  	  <h5 class="center">Dataset 1 with Chart Output</h5>
-  	  <p>The numbers, respectively, for this dataset are 5, 10, 27.5, 27.5, 15, and 15.</p>
+  	  <h5 class="center alicebluetext">Dataset 1 with Chart Output</h5>
+  	  <p class="alicebluetext">The numbers, respectively, for this dataset are 5, 10, 27.5, 27.5, 15, and 15.</p>
   	  <!--Surrouding the images with p tags so that css will make them reactive-->
   	  <p class="center">
   	  <!-- <img src="{{ url_for('static', filename='images/Schedule1.png') }}" /> -->
@@ -98,10 +96,12 @@
   	  </p>
 
   	  <!--Using break 7 times to add extra space for visuals in between each grouping within the section-->
-  	  </br></br></br></br></br></br></br>
+      {% for i in range(7) %}
+  	     </br>
+      {% endfor %}
 
-  	  <h5 class="center">Dataset 2 with Chart Output</h5>
-  	  <p>The numbers, respectively, for this dataset are 5, 0, 50, 30, 5, and 5.</p>
+  	  <h5 class="center alicebluetext">Dataset 2 with Chart Output</h5>
+  	  <p class="alicebluetext">The numbers, respectively, for this dataset are 5, 0, 50, 30, 5, and 5.</p>
   	  <!--Surrouding the images with p tags so that css will make them reactive-->
   	  <p class="center">
   	  <!-- <img src="{{ url_for('static', filename='images/Schedule2.png') }}" /> -->
@@ -118,8 +118,8 @@
         </br>
       {% endfor %}
 
-  	  <h5 class="center">Dataset 3 with Chart Output</h5>
-  	  <p>The numbers, respectively, for this dataset are 5, 5, 15, 15, 30, and 30.</p>
+  	  <h5 class="center alicebluetext">Dataset 3 with Chart Output</h5>
+  	  <p class="alicebluetext">The numbers, respectively, for this dataset are 5, 5, 15, 15, 30, and 30.</p>
   	  <!--Surrouding the images with p tags so that css will make them reactive-->
   	  <p class="center">
   	  <!-- <img src="{{ url_for('static', filename='images/Schedule3.png') }}" /> -->

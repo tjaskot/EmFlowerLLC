@@ -1,3 +1,4 @@
+/***********************/
 /* Side Navigation Bar */
 @media screen and (min-width: 720px) {
   .topNavBar {
@@ -48,7 +49,10 @@
 
 /* Top Navigation Bar */
 @media screen and (max-width: 719px){
-  .sideNavBar{
+  .parallax {
+    background-attachment: scroll;
+  }
+  .sideNavBar {
     display: none;
   }
 
@@ -93,27 +97,61 @@
   }
 }
 /* End Top Navigation Bar */
+/**************************/
 
-/* Max media is for reactive display */
-@media screen and (max-width: 719px) {
-  .userPlotlyChart {
-    width: 100%;
-    height: 85vh;
-  }
+.fa {
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
 }
 
-@media screen and (min-width: 720px) and (max-width: 1079px) {
-  .userPlotlyChart {
-    width: 600px;
-    height: 500px;
-  }
+.fa:hover {
+    opacity: 0.7;
 }
 
-@media screen and (min-width: 1080px) {
-  .userPlotlyChart {
-    width: 800px;
-    height: 650px;
-  }
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+.fa-pinterest {
+  background: #cb2027;
+  color: white;
+}
+
+.fa-snapchat-ghost {
+  background: #fffc00;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.parallax {
+  background-image: url("../images/coloradobkgndsquare.jpg");
+
+  /* Set a specific height */
+/*  height: 100%;*/
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* This px padding accomodates for bootstrap negative left/right row margin of 15px, and adds plus 5 for nicer visuals */
@@ -157,8 +195,20 @@
   color: red;
 }
 
+.alicebluetext {
+  color: aliceblue;
+}
+
 .bkgw {
   background-color: white;
+}
+
+.bkga {
+  background-color: azure;
+}
+
+.bkgivory {
+  background-color: ivory;
 }
 
 .center {
@@ -171,5 +221,5 @@
 }
 
 .linkShift {
-  padding-bottom: 15vh;
+  padding-bottom: 10vh;
 }

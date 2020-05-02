@@ -1,5 +1,20 @@
+.parallaxemflowersllc {
+  background-image: url("../images/sanfranmain.jpg");
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
 .center {
   text-align: center;
+}
+
+.emgridmargin {
+  padding: 5vh;
 }
 
 .row {
@@ -9,15 +24,14 @@
 }
 
 .column {
-  flex: 25%;
-  max-width: 25%;
+  flex: 30%;
+  max-width: 30%;
   padding-right: 4px;
-
 }
 
 .column img {
   height: auto;
-  margin-top: 1vh;
+  margin: 1vh 1vh 0 1vh;
   vertical-align: middle;
   width: 100%;
   image-orientation: from-image;
@@ -30,7 +44,7 @@ img:hover {
     border-radius: 3vh;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 720px) {
   .column.indexGrid {
     flex: 50%;
     max-width: 50%;
@@ -41,7 +55,7 @@ img:hover {
   .column.indexGrid {
     max-width: 100%;
   }
-  .row .indexGrid {
+  .row.indexGrid {
     padding-left: 5vw;
   }
 }
