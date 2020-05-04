@@ -57,8 +57,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #SQLALCHEMY_DATABASE_URI = os.environ.get['DATABASE_URL']
 #DATABASE_URL = os.environ['DATABASE_URL']
 #app.config['DATABASE_URL'] = DATABASE_URL
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://qigrsimgrdwmrp:d22e5ad57160b685561b78c099167fcbd49a42c3a718de61bf785126aca321bf@ec2-52-6-143-153.compute-1.amazonaws.com:5432/depm009vdoa4em"
 DATABASE_URL = "postgres://qigrsimgrdwmrp:d22e5ad57160b685561b78c099167fcbd49a42c3a718de61bf785126aca321bf@ec2-52-6-143-153.compute-1.amazonaws.com:5432/depm009vdoa4em"
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['DATABASE_URL'] = DATABASE_URL
 psqlconn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
