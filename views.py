@@ -44,7 +44,7 @@ def contacts():
         cc = ['trevor186@msn.com']
         bcc = []
         sender = 'myFlowerShop@outlook.com'
-        msg = MIMMultipart('alternative')
+        msg = MIMEMultipart('alternative')
         msg['Subject'] = 'Flower Info Request'
         msg['From'] = sender
         msg['To'] = ",".join(recipient)
